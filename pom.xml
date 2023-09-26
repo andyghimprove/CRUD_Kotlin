@@ -19,6 +19,8 @@
         <dgs.version>4.8.0</dgs.version>
         <dgs-codegen-client.version>5.1.2</dgs-codegen-client.version>
         <graphqlcodegen-maven-plugin.version>1.11</graphqlcodegen-maven-plugin.version>
+        <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
+        <graphql-dgs-codegen-core.version>5.1.2</graphql-dgs-codegen-core.version>
     </properties>
 
     <dependencyManagement>
@@ -26,6 +28,7 @@
             <dependency>
                 <groupId>com.netflix.graphql.dgs</groupId>
                 <artifactId>graphql-dgs-platform-dependencies</artifactId>
+                <!-- The DGS BOM/platform dependency. This is the only place you set version of DGS -->
                 <version>${dgs.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -47,37 +50,40 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
+
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
@@ -85,7 +91,7 @@
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>
                 <artifactId>groovy-maven-plugin</artifactId>
-                <version>2.1.1</version>
+                <version>${groovy-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>generate-kotlin-graphql-types</id>
@@ -101,7 +107,7 @@
                                         java.nio.file.Paths.get("target/generated-sources/graphql"), // outputDir
                                         java.nio.file.Paths.get("generated-examples"), // examplesOutputDir
                                         true, // writeToFiles
-                                        "com.andygomez.newcrud.generated.graphql", // packageName
+                                        "com.andygomez.newcrud", // packageName
                                         "client", // subPackageNameClient
                                         "datafetchers", // subPackageNameDatafetchers
                                         "types", // subPackageNameTypes
@@ -124,52 +130,6 @@
                                 )
                                 codeGen = new com.netflix.graphql.dgs.codegen.CodeGen(config)
                                 codeGen.generate()
-//                                config = new com.netflix.graphql.dgs.codegen.CodeGenConfig(
-//                                        [] as Set, // schemas
-//                                        [new java.io.File("src/main/resources/schema")] as Set, // schemaFiles
-//                                        [],
-//                                        java.nio.file.Paths.get("target/generated-sources/graphql"), // outputDir
-//                                        java.nio.file.Paths.get("generated-examples"), // examplesOutputDir
-//                                        true, // writeToFiles
-//                                        "com.andygomez.newcrud", // packageName
-//                                        "client", // subPackageNameClient
-//                                        "datafetchers", // subPackageNameDatafetchers
-//                                        "types", // subPackageNameTypes
-//                                        "docs",
-//                                        com.netflix.graphql.dgs.codegen.Language.KOTLIN, // language
-//                                        false, // generateBoxedTypes
-//                                        false,
-//                                        true, // generateClientApi
-//                                        false,
-//                                        false, // generateInterfaces
-//                                        false,
-//                                        false,
-//                                        [], // typeMapping
-//                                        [] as Set, // includeQueries
-//                                        [] as Set, // includeMutations
-//                                        [] as Set, // includeSubscriptions
-//                                        false, // skipEntityQueries
-//                                        false, // shortProjectionNames
-//                                        true, // generateDataTypes
-//                                        false, // omitNullInputFields
-//                                        10, // maxProjectionDepth
-//                                        true, // kotlinAllFieldsOptional
-//                                        false, // snakeCaseConstantNames
-//                                        false, // generateInterfaceSetters
-//                                        false,
-//                                        false,
-//                                        java.nio.file.Paths.get("generated-docs"),
-//                                        [] as Set,
-//                                        [] as Set,
-//                                        [] as Set,
-//                                        false,
-//                                        true,
-//                                        false,
-//                                        false,
-//                                        false
-//                                )
-//                                codeGen = new com.netflix.graphql.dgs.codegen.CodeGen(config)
-//                                codeGen.generate()
                             </source>
                         </configuration>
                     </execution>
@@ -185,41 +145,36 @@
             </plugin>
 
             <plugin>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>compile-generated-kotlin-graphql-types</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>target/generated-sources/graphql</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>1.6.21</version>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                    <compilerPlugins>
+                        <plugin>spring</plugin>
+                        <plugin>jpa</plugin>
+                    </compilerPlugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-noarg</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -241,5 +196,3 @@
     </build>
 
 </project>
-
-
