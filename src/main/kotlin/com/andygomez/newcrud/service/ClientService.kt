@@ -4,7 +4,6 @@ import com.andygomez.newcrud.exception.ClientException
 import com.andygomez.newcrud.model.Client
 import com.andygomez.newcrud.repository.ClientRepository
 import org.springframework.stereotype.Service
-import kotlin.math.log
 
 @Service
 class ClientService(private val repository: ClientRepository) {
