@@ -17,6 +17,7 @@
         <java.version>11</java.version>
         <kotlin.version>1.6.21</kotlin.version>
         <dgs.version>4.9.16</dgs.version>
+        <jooq.version>3.18.5</jooq.version>
         <dgs-codegen-client.version>5.1.2</dgs-codegen-client.version>
         <graphqlcodegen-maven-plugin.version>1.11</graphqlcodegen-maven-plugin.version>
         <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
@@ -36,6 +37,23 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+
+<!--        &lt;!&ndash; Dependencias de jOOQ &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.jooq</groupId>-->
+<!--            <artifactId>jooq</artifactId>-->
+<!--            <version>${jooq.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.jooq</groupId>-->
+<!--            <artifactId>jooq-meta</artifactId>-->
+<!--            <version>${jooq.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.jooq</groupId>-->
+<!--            <artifactId>jooq-codegen</artifactId>-->
+<!--            <version>${jooq.version}</version>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.netflix.graphql.dgs.codegen</groupId>
@@ -96,6 +114,45 @@
         <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
         <plugins>
+
+<!--            <plugin>-->
+<!--                <groupId>org.jooq</groupId>-->
+<!--                <artifactId>jooq-codegen-maven</artifactId>-->
+<!--                <version>${jooq.version}</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>generate-jooq-sources</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; Configuración de la base de datos &ndash;&gt;-->
+<!--                            <jdbc>-->
+<!--                                <driver>org.postgresql.Driver</driver>-->
+<!--                                <url>jdbc:postgresql://localhost:2022/School</url>-->
+<!--                                <user>postgres</user>-->
+<!--                                <password>root</password>-->
+<!--                            </jdbc>-->
+<!--                            <generator>-->
+<!--                                <name>org.jooq.codegen.DefaultGenerator</name>-->
+<!--                                <database>-->
+<!--                                    <name>org.jooq.meta.postgres.PostgresDatabase</name>-->
+<!--                                    <includes>.*</includes>-->
+<!--                                </database>-->
+<!--                                <generate>-->
+<!--                                    <daos>true</daos>-->
+<!--                                    <pojos>true</pojos>-->
+<!--                                </generate>-->
+<!--                                <target>-->
+<!--                                    &lt;!&ndash; Directorio de salida para las clases generadas &ndash;&gt;-->
+<!--                                    <packageName>com.andygomez.newcrud.generated</packageName>-->
+<!--                                </target>-->
+<!--                            </generator>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
             <plugin>
                 <groupId>org.codehaus.gmaven</groupId>
