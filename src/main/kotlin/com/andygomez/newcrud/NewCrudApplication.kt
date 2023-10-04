@@ -8,4 +8,6 @@ class NewCrudApplication
 
 fun main(args: Array<String>) {
 	runApplication<NewCrudApplication>(*args)
+
 }
+

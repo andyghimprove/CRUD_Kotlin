@@ -1,9 +1,12 @@
 package com.andygomez.newcrud.command.domain.repository
 
-import com.andygomez.newcrud.command.domain.Client
-import org.springframework.data.jpa.repository.JpaRepository
+import com.andygomez.newcrud.command.domain.ClientModel
+import com.andygomez.newcrud.command.web.model.UpdateClientInput
 import org.springframework.stereotype.Repository
 
 @Repository
-interface UpdateClient : JpaRepository<Client, Int> {
+interface UpdateClient{
+
+    fun updateClient(id: Int, updateClient: ClientModel): ClientModel?
+
 }

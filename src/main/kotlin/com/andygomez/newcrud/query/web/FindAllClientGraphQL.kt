@@ -1,6 +1,6 @@
 package com.andygomez.newcrud.query.web
 
-import com.andygomez.newcrud.command.domain.Client
+import com.andygomez.newcrud.command.domain.ClientModel
 import com.andygomez.newcrud.command.domain.repository.FindAllClient
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
@@ -9,8 +9,8 @@ import com.netflix.graphql.dgs.DgsQuery
 class FindAllClientGraphQL(private val service: FindAllClient) {
 
     @DgsQuery
-    fun getAllClient(): List<Client> {
-        return service.findAll()
+    fun getAllClient(): List<ClientModel> {
+        return service.findAllClient()
     }
 
 }

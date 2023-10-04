@@ -1,10 +1,10 @@
 package com.andygomez.newcrud.command.domain.repository
 
-import com.andygomez.newcrud.command.domain.Client
-import org.springframework.data.jpa.repository.JpaRepository
+import com.andygomez.newcrud.command.domain.ClientModel
+import com.andygomez.newcrud.jooq.tables.Client
 import org.springframework.stereotype.Repository
 
 @Repository
-interface FindAllClient : JpaRepository<Client, Int> {
-    fun findByName(name: String): List<Client>
+interface FindAllClient {
+    fun findAllClient(): List<ClientModel>
 }

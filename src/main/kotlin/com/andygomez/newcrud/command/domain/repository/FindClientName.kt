@@ -1,12 +1,11 @@
 package com.andygomez.newcrud.command.domain.repository
 
-import com.andygomez.newcrud.command.domain.Client
-import org.springframework.data.jpa.repository.JpaRepository
+import com.andygomez.newcrud.command.domain.ClientModel
 import org.springframework.stereotype.Repository
 
 @Repository
-interface FindClientName : JpaRepository<Client, Int> {
+interface FindClientName {
 
-    fun findByName(name: String): List<Client>
+    fun findByName(name: String): ClientModel?
 
 }
