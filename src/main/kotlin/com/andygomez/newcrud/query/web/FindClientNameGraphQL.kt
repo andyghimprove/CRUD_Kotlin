@@ -15,5 +15,4 @@ class FindClientNameGraphQL(private val service: FindNameAdapter) {
     fun findClientByName(@InputArgument name: String): ClientModel? {
         return service.findByName(name)
     }
-
 }

@@ -1,11 +1,9 @@
 package com.andygomez.newcrud.command.domain.repository
 
 import com.andygomez.newcrud.command.domain.ClientModel
-import org.springframework.stereotype.Repository
+import com.andygomez.newcrud.command.web.model.CreateClientInput
 
-@Repository
-interface CreateClient  {
 
-    fun createNewClient(clientModel: ClientModel): ClientModel
-
+interface CreateClient {
+    fun createNewClient(input: CreateClientInput): ClientModel
 }
