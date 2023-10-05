@@ -1,9 +1,9 @@
 package com.andygomez.newcrud.command.domain.repository
 
-import com.andygomez.newcrud.command.domain.Client
-import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.stereotype.Repository
+import com.andygomez.newcrud.command.domain.ClientModel
+import com.andygomez.newcrud.command.web.model.CreateClientInput
 
-@Repository
-interface CreateClient : JpaRepository<Client, Int> {
+
+interface CreateClient {
+    fun createNewClient(input: CreateClientInput): ClientModel
 }

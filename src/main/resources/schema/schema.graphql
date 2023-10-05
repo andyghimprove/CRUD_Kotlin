@@ -1,4 +1,4 @@
-type Client {
+type ClientModel {
     id: Int!
     name: String!
     lastName: String!
@@ -6,25 +6,25 @@ type Client {
 }
 
 type Query {
-    getAllClient: [Client]
-    findClientByName(name: String!): [Client]
+    getAllClient: [ClientModel]
+    findClientByName(name: String!): ClientModel
 }
 
 type Mutation {
-    createNewClient(client: ClientInput): Client
-    updateClient(id: Int, client: UpdateClientInput): Client
+    createNewClient(client: CreateClientInput): ClientModel
+    updateClient(id: Int, client: UpdateClientInput): ClientModel
 
 }
 
-input ClientInput {
+input CreateClientInput {
     name: String!
     lastName: String!
     email: String!
 }
 
 input UpdateClientInput {
-    name: String
-    lastName: String
-    email: String
+    name: String!
+    lastName: String!
+    email: String!
 }
 
