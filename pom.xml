@@ -141,7 +141,7 @@
                 <configuration>
                     <jdbc>
                         <driver>org.postgresql.Driver</driver>
-                        <url>jdbc:postgresql://localhost:2022/School</url>
+                        <url>jdbc:postgresql://localhost:2022/postgres</url>
                         <user>postgres</user>
                         <password>root</password>
                     </jdbc>
