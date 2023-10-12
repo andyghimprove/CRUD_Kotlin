@@ -1,0 +1,24 @@
+type Query {
+    findAllClient: [ClientModel]
+    findByName(name: String!): ClientModel
+    findStatus(status: ClientStatus): [ClientModel]
+}
+
+type ClientModel {
+    id: Int!
+    name: String!
+    last_name: String!
+    email: String!
+    payment_amount: Int!
+    status: ClientStatus
+}
+
+enum ClientStatus {
+    PaymentAtTime
+    LatePayment
+    NotPayed
+}
+
+
+
+
