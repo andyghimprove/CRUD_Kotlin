@@ -1,6 +1,6 @@
 type Mutation {
     createNewClient(newClient: ClientInput): ClientModel
-    updateClient(id: Int!, updateClient: ClientInput): ClientModel
+    updateClient(id: Int!, updateClient: ClientUpdateInput): ClientModel
 }
 
 input ClientInput {
@@ -8,6 +8,13 @@ input ClientInput {
     last_name: String!
     email: String!
     payment_amount: Int!
+}
+
+input ClientUpdateInput{
+    name: String
+    last_name: String
+    email: String
+    payment_amount: Int
 }
 
 
